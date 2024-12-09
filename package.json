@@ -1,0 +1,28 @@
+{
+  "name": "metroman",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prestart": "pnpm build",
+    "start": "node dist/server.js",
+    "dev": "ts-node src/server.ts",
+    "dev:server": "nodemon --watch src --exec 'npx' 'ts-node' src/server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/sensible": "^6.0.1",
+    "axios": "^1.7.9",
+    "fastify": "^5.1.0",
+    "node-cache": "^5.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "nodemon": "^3.1.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  }
+}
