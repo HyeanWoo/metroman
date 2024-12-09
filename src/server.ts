@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import fastify from 'fastify';
 import sensible from '@fastify/sensible';
+import cors from '@fastify/cors';
 
 dotenv.config({ path: '.env.local' });
 dotenv.config();
@@ -8,20 +9,24 @@ dotenv.config();
 const PORT = parseInt(process.env.PORT || '8080', 10);
 
 const server = fastify({
-  // logger: true,
+  logger: true,
 });
 
 server.register(sensible);
-
-server.get('/', async (request, reply) => {
-  reply.send({ hello: 'world' });
+server.register(cors, {
+  origin: 'localhost:3000',
+  methods: 'GET',
 });
 
-server.get('/ping', async (request, reply) => {
+server.get('/', async (req, rep) => {
+  rep.send({ hello: 'world' });
+});
+
+server.get('/ping', async (req, rep) => {
   return 'pong';
 });
 
-server.get('/pong', async (request, reply) => {
+server.get('/pong', async (req, rep) => {
   return 'ping';
 });
 
