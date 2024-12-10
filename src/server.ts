@@ -19,18 +19,6 @@ server.register(cors, {
   methods: 'GET',
 });
 
-server.get('/', async (req, rep) => {
-  rep.send({ hello: 'world' });
-});
-
-server.get('/ping', async (req, rep) => {
-  return 'pong';
-});
-
-server.get('/pong', async (req, rep) => {
-  return 'ping';
-});
-
 router(server);
 
 server.listen({ port: PORT }, async (err, address) => {
