@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import fastify from 'fastify';
 import sensible from '@fastify/sensible';
 import cors from '@fastify/cors';
+import router from './routes';
 
 dotenv.config({ path: '.env.local' });
 dotenv.config();
@@ -29,6 +30,8 @@ server.get('/ping', async (req, rep) => {
 server.get('/pong', async (req, rep) => {
   return 'ping';
 });
+
+router(server);
 
 server.listen({ port: PORT }, async (err, address) => {
   if (err) {
