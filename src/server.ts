@@ -8,6 +8,7 @@ dotenv.config({ path: '.env.local' });
 dotenv.config();
 
 const PORT = parseInt(process.env.PORT || '8080', 10);
+const CROSS_ORIGIN_URL = process.env.CLIENT_URL || 'http://localhost:3000';
 
 const server = fastify({
   logger: true,
@@ -15,8 +16,8 @@ const server = fastify({
 
 server.register(sensible);
 server.register(cors, {
-  origin: [process.env.CLIENT_URL || 'http://localhost:3000'],
-  // methods: 'GET',
+  origin: [CROSS_ORIGIN_URL],
+  methods: 'GET',
 });
 
 router(server);
