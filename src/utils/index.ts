@@ -1,9 +1,13 @@
-export type {
-  MetroLineType,
-  MetroLineNameKorType,
-  MetroLineKeyType,
+export {
+  MetroLine,
+  MetroLineNameKor,
+  StationList,
+  ExpressStatus,
+  LastStatus,
+  TrainStateStatus,
+  UpDownLine,
+  StatusCode,
 } from './constants';
-export { MetroLine, MetroLineNameKor, StationList } from './constants';
 
 export { default as cache } from './cache';
 
