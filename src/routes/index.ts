@@ -1,8 +1,8 @@
 import type { FastifyInstance } from 'fastify';
-import mockHandler from './mock';
 import healthCheckHandler from './healthCheck';
+import metroListHandler from './metroList';
 
 export default function (server: FastifyInstance) {
   healthCheckHandler(server);
-  mockHandler(server);
+  metroListHandler(server);
 }
