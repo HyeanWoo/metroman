@@ -1,5 +1,6 @@
 import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
-import { cache, MetroLineKeyType } from '../utils';
+import type { MetroLineKeyType } from '../types';
+import { cache } from '../utils';
 import { mockingPositionApi } from '../services';
 
 interface ParamsType {
