@@ -22,10 +22,6 @@ export const MetroLineNameKor = {
   line9: '9호선',
 } as const;
 
-export type MetroLineKeyType = keyof typeof MetroLine;
-export type MetroLineType = (typeof MetroLine)[MetroLineKeyType];
-export type MetroLineNameKorType = (typeof MetroLineNameKor)[MetroLineKeyType];
-
 export const StationList = [
   { id: 1004000409, name: '당고개' },
   { id: 1004000410, name: '상계' },
