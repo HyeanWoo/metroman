@@ -15,8 +15,8 @@ const server = fastify({
 
 server.register(sensible);
 server.register(cors, {
-  origin: 'localhost:3000',
-  methods: 'GET',
+  origin: [process.env.CLIENT_URL || 'http://localhost:3000'],
+  // methods: 'GET',
 });
 
 router(server);
