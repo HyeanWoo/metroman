@@ -19,7 +19,9 @@ function getFullMetroTime(date: Date): string {
   return date.toISOString().replace('T', ' ').split('.')[0];
 }
 
-export function mockingPosition(lineNumber: MetroLineKeyType) {
+export async function mockingPosition(lineNumber: MetroLineKeyType) {
+  await new Promise((resolve) => setTimeout(resolve, 1500));
+
   const min = 30;
   const max = 40;
   const totalMetroInService = Math.floor(Math.random() * (max - min + 1)) + min;
