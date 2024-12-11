@@ -1,31 +1,35 @@
-import dotenv from 'dotenv';
 import fastify from 'fastify';
-import sensible from '@fastify/sensible';
-import cors from '@fastify/cors';
-import router from './routes';
-
-dotenv.config({ path: '.env.local' });
-dotenv.config();
-
-const PORT = parseInt(process.env.PORT || '8080', 10);
-const CROSS_ORIGIN_URL = process.env.CLIENT_URL || 'http://localhost:3000';
+import routerHandler from './routes';
+import { PORT, REFRESH_INTERVAL } from './config';
+import pluginHandler from './plugins';
+import { cache, gracefulShutdown } from './utils';
+import { mockingPositionApi } from './services';
 
 const server = fastify({
-  logger: true,
+  // logger: true,
 });
 
-server.register(sensible);
-server.register(cors, {
-  origin: [CROSS_ORIGIN_URL],
-  methods: 'GET',
-});
+pluginHandler(server);
+routerHandler(server);
 
-router(server);
+const start = () => {
+  server.listen({ port: PORT }, async (err, address) => {
+    if (err) {
+      server.log.error(err);
+      process.exit(1);
+    }
+    console.log(`Server listening at ${address}`);
+  });
+};
 
-server.listen({ port: PORT }, async (err, address) => {
-  if (err) {
-    server.log.error(err);
-    process.exit(1);
-  }
-  console.log(`Server listening at ${address}`);
-});
+start();
+
+const externalApiIntervalId = setInterval(() => {
+  mockingPositionApi('line4');
+  console.log(cache.get('line4'));
+}, REFRESH_INTERVAL);
+
+const shutdownHandler = () => gracefulShutdown(server, externalApiIntervalId);
+
+process.on('SIGINT', shutdownHandler);
+process.on('SIGTERM', shutdownHandler);
