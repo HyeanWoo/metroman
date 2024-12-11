@@ -1,9 +1,10 @@
+import cache from '../utils/cache';
 import {
   MetroLine,
   MetroLineKeyType,
   MetroLineNameKor,
   StationList,
-} from './constants';
+} from '../utils/constants';
 
 function addRandomTime(currentTime: Date): Date {
   const randomMs = Math.floor(Math.random() * (3 * 60 * 1000)) + 1 * 60 * 1000;
@@ -19,7 +20,7 @@ function getFullMetroTime(date: Date): string {
   return date.toISOString().replace('T', ' ').split('.')[0];
 }
 
-export async function mockingPosition(lineNumber: MetroLineKeyType) {
+export async function mockingPositionApi(lineNumber: MetroLineKeyType) {
   await new Promise((resolve) => setTimeout(resolve, 1500));
 
   const min = 30;
@@ -57,11 +58,15 @@ export async function mockingPosition(lineNumber: MetroLineKeyType) {
     currentDate = addRandomTime(currentDate);
   }
 
-  return {
+  const data = {
     errorMessage: {
       status: 200,
       total: totalMetroInService,
     },
     realtimePositionList,
   };
+
+  cache.set(lineNumber, data);
+
+  return data;
 }
