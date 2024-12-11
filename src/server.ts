@@ -4,6 +4,7 @@ import { PORT, REFRESH_INTERVAL } from './config';
 import pluginHandler from './plugins';
 import { cache, gracefulShutdown } from './utils';
 import { mockingPositionApi } from './services';
+import { MetroListResponse } from './types';
 
 const server = fastify({
   // logger: true,
@@ -26,7 +27,13 @@ start();
 
 const externalApiIntervalId = setInterval(() => {
   mockingPositionApi('line4');
-  console.log(cache.get('line4'));
+  console.log(
+    cache
+      .get<MetroListResponse>('line4')
+      ?.realtimePositionList.map(
+        (metro) => `${metro.trainNo}:${metro.statnNm}|${metro.subwayNm}`,
+      ),
+  );
 }, REFRESH_INTERVAL);
 
 const shutdownHandler = () => gracefulShutdown(server, externalApiIntervalId);
