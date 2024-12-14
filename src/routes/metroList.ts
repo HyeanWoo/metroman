@@ -9,7 +9,7 @@ interface ParamsType {
 
 export default async function (server: FastifyInstance) {
   server.get(
-    '/metro-line/:lineNumber',
+    '/metro-list/:lineNumber',
     async (
       request: FastifyRequest<{ Params: ParamsType }>,
       reply: FastifyReply,
