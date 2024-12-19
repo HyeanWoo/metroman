@@ -1,6 +1,6 @@
 import fastify from 'fastify';
 import routerHandler from './routes';
-import { PORT, REFRESH_INTERVAL } from './config';
+import { HOST, PORT, REFRESH_INTERVAL } from './config';
 import pluginHandler from './plugins';
 import { cache, gracefulShutdown } from './utils';
 import { mockingPositionApi } from './services';
@@ -14,7 +14,7 @@ pluginHandler(server);
 routerHandler(server);
 
 const start = () => {
-  server.listen({ port: PORT }, async (err, address) => {
+  server.listen({ port: PORT, host: HOST }, async (err, address) => {
     if (err) {
       server.log.error(err);
       process.exit(1);
