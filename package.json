@@ -1,8 +1,8 @@
 {
   "name": "metroman",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.1.0",
+  "description": "always rings twice",
+  "main": "src/server.ts",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "prestart": "pnpm build",
@@ -11,7 +11,7 @@
     "dev:server": "nodemon --watch src --exec 'npx' 'ts-node' src/server.ts"
   },
   "keywords": [],
-  "author": "",
+  "author": "hyeanwoo",
   "license": "ISC",
   "dependencies": {
     "@fastify/cors": "^10.0.1",
