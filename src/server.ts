@@ -25,18 +25,18 @@ const start = () => {
 
 start();
 
-const externalApiIntervalId = setInterval(() => {
-  mockingPositionApi('line4');
-  console.log(
-    cache
-      .get<MetroListResponse>('line4')
-      ?.realtimePositionList.map(
-        (metro) => `${metro.trainNo}:${metro.statnNm}|${metro.subwayNm}`,
-      ),
-  );
-}, REFRESH_INTERVAL);
+// const externalApiIntervalId = setInterval(() => {
+//   mockingPositionApi('line4');
+//   console.log(
+//     cache
+//       .get<MetroListResponse>('line4')
+//       ?.realtimePositionList.map(
+//         (metro) => `${metro.trainNo}:${metro.statnNm}|${metro.subwayNm}`,
+//       ),
+//   );
+// }, REFRESH_INTERVAL);
 
-const shutdownHandler = () => gracefulShutdown(server, externalApiIntervalId);
+const shutdownHandler = () => gracefulShutdown(server);
 
 process.on('SIGINT', shutdownHandler);
 process.on('SIGTERM', shutdownHandler);
