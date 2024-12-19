@@ -3,11 +3,13 @@ import cache from './cache';
 
 export default async function (
   server: FastifyInstance,
-  intervalId: NodeJS.Timeout,
+  intervalId?: NodeJS.Timeout,
 ) {
   try {
     server.log.info('Shutting down server...');
-    clearInterval(intervalId);
+    if (intervalId) {
+      clearInterval(intervalId);
+    }
     await server.close();
     cache.close();
     process.exit(0);
