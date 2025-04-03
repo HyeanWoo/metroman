@@ -10,10 +10,7 @@ interface ParamsType {
 export default async function (server: FastifyInstance) {
   server.get(
     '/metro-list/:lineNumber',
-    async (
-      request: FastifyRequest<{ Params: ParamsType }>,
-      reply: FastifyReply,
-    ) => {
+    async (request: FastifyRequest<{ Params: ParamsType }>, reply: FastifyReply) => {
       const { lineNumber } = request.params;
       const cachedData = cache.get(lineNumber);
 

@@ -1,8 +1,4 @@
-import type {
-  MetroLineKeyType,
-  MetroListResponse,
-  UpDownLineType,
-} from '../types';
+import type { MetroLineKeyType, MetroListResponse, UpDownLineType } from '../types';
 import cache from '../utils/cache';
 import {
   ExpressStatus,
@@ -27,9 +23,7 @@ function getFullMetroTime(date: Date): string {
   return date.toISOString().replace('T', ' ').split('.')[0];
 }
 
-export async function mockingPositionApi(
-  lineNumber: MetroLineKeyType,
-): Promise<MetroListResponse> {
+export async function mockingPositionApi(lineNumber: MetroLineKeyType): Promise<MetroListResponse> {
   await new Promise((resolve) => setTimeout(resolve, 1500));
 
   const min = 30;
@@ -43,9 +37,7 @@ export async function mockingPositionApi(
     const randomStation = StationList[Math.floor(Math.random() * 48)];
     const recentDate = getMetroDate(currentDate);
     const recentTime = getFullMetroTime(currentDate);
-    const updnLine = ['0', '1'][
-      Math.floor(Math.random() * 2)
-    ] as UpDownLineType;
+    const updnLine = ['0', '1'][Math.floor(Math.random() * 2)] as UpDownLineType;
 
     const oneMetro = {
       rowNum: i + 1,

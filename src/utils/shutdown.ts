@@ -1,10 +1,7 @@
 import type { FastifyInstance } from 'fastify';
 import cache from './cache';
 
-export default async function (
-  server: FastifyInstance,
-  intervalId?: NodeJS.Timeout,
-) {
+export default async function (server: FastifyInstance, intervalId?: NodeJS.Timeout) {
   try {
     server.log.info('Shutting down server...');
     if (intervalId) {

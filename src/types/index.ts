@@ -13,10 +13,8 @@ export type MetroLineType = (typeof MetroLine)[MetroLineKeyType];
 export type MetroLineNameKorType = (typeof MetroLineNameKor)[MetroLineKeyType];
 
 export type UpDownLineType = (typeof UpDownLine)[keyof typeof UpDownLine];
-export type TrainStateStatusType =
-  (typeof TrainStateStatus)[keyof typeof TrainStateStatus];
-export type ExpressStatusType =
-  (typeof ExpressStatus)[keyof typeof ExpressStatus];
+export type TrainStateStatusType = (typeof TrainStateStatus)[keyof typeof TrainStateStatus];
+export type ExpressStatusType = (typeof ExpressStatus)[keyof typeof ExpressStatus];
 export type LastStatusType = (typeof LastStatus)[keyof typeof LastStatus];
 
 export type StatusCodeType = keyof typeof StatusCode;
